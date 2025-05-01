@@ -1,0 +1,133 @@
+/* Estilos modernos para la configuración de usuarios */
+
+body {
+    background-color: #47474d;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  h2, h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ffffff;
+  }
+  
+  .card {
+    background-color: #2c2c2e;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 660px;
+    margin: 5px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  label {
+    display: block;
+    margin: 1rem 0 0.3rem;
+    color: #bbb;
+  }
+  
+  input[type="password"]{
+    width: 95%;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #444;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+
+  select {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #444;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  
+  button {
+    background-color: #4b6cb7;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 1rem auto;
+  }
+  
+  button:hover {
+    background-color: #3a4f8c;
+  }
+  
+  .table-container {
+    max-width: 720px;
+    margin: 1rem auto;
+    overflow-x: auto;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #343437;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .user-table th, .user-table td {
+    padding: 0.5rem 0.3rem;
+    text-align: left;
+    
+  }
+  
+  .user-table th {
+    background-color: #3c3c3e;
+    color: #f0f0f0;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #2a2a2c;
+  }
+  
+  .user-table td {
+    color: #ddd;
+    font-size: 1rem;
+  }
+  
+  .user-table td.estado-invalida {
+    color: #ff6b6b;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .user-table td.estado-valida {
+    color: #81f781;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .user-table select {
+    background-color: #444;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 2px;
+    font-size: 1rem;
+    
+  }
+  
+  
+  .swal2-popup.swal-dark {
+    background-color: #2c2c2e !important;
+    color: #e0e0e0 !important;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  }

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>COFACO_BLE_WEB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="cofaco280.ico">
+    <link rel="stylesheet" type="text/css" href="css/styles_admin.css">
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <div class="topnav">
+        <!-- <h1>COFACO_WEB</h1> -->
+        <div class="centered-logo">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+       
+        <div class="usuario-box">
+            <span id="usuarioActivo" class="usuario-label"></span>
+            <button class="logout-button" onclick="cerrarSesion()">Salir</button>
+        </div>
+        
+        <div class="menu-config" id="adminMenu">
+            <button class="menu-button">⚙️ Configuración</button>
+            <div class="dropdown-content">
+              <a href="config-usuario.html">Usuarios</a>
+              <a href="config-permisos.html">Permisos</a>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="content">
+
+        <!-- Spinner de carga -->
+        <div id="spinner" class="spinner-overlay" style="display: none;">
+            <div class="spinner-box">
+            <div class="loader"></div>
+            <p id="spinner-text">Procesando...</p>
+            </div>
+        </div>
+
+        <!-- Pantalla de inicio -->
+         
+        <div id="pantalla-inicio">
+            <div class="card-grid">
+                <div class="card">
+                    <p>
+                        <button id="connectBleButton" class="connectButton"> Conectar </button>
+                        <button id="disconnectBleButton" class="disconnectButton"> Desconectar</button>
+                    </p>
+                    <p class="gray-label">Estado: <strong><span id="bleState" style="color:#d13a30;">Deconectado</span></strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modelo CE4 -->
+        <div id="pantalla-CE4" class="pantalla">
+            <h2>Modelo CE4</h2>
+           
+            <div class="card-grid">
+
+                <div class="card">
+                    <h2>Estado del Quemador</h2>
+                    <p class="reading"><span id="valueContainer">Sin Dato</span></p>
+                    <p class="reading"><span id="tiempoState">0</span></p>
+                    <p class="gray-label">Ultima Lectura: <span id="timestamp"></span></p>
+                </div>
+
+                <div class="card">
+                    <h2>Estado Entradas</h2>
+                    <div class="led-panel">
+                        <div class="led-group">
+                          
+                            <div class="led-labels">
+                                <span>INI</span><span>REA</span><span>MVC</span><span>PAB</span><span>PGB</span><span>PGA</span><span>PPG</span><span>FCA</span><span>FCC</span><span>DET</span>
+                            </div>
+                            <div class="led-lights">
+                                <div id="led-in1" class="led off"></div>
+                                <div id="led-in2" class="led off"></div>
+                                <div id="led-in3" class="led off"></div>
+                                <div id="led-in4" class="led off"></div>
+                                <div id="led-in5" class="led off"></div>
+                                <div id="led-in6" class="led off"></div>
+                                <div id="led-in7" class="led off"></div>
+                                <div id="led-in8" class="led off"></div>
+                                <div id="led-in9" class="led off"></div>
+                                <div id="led-in10" class="led off"></div>
+                            </div>
+
+                     
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="card">
+                    <h2>Estado Salidas</h2>
+
+                    <div class="led-panel">
+                        <div class="led-group">
+                           
+                            <div class="led-labels">
+                                <span>SQ3</span><span>SQ2</span><span>SQ1</span><span>SPI</span><span>ENC</span><span>MOT</span>
+                            </div>
+                            <div class="led-lights">
+                                <div id="led-out1" class="led off"></div>
+                                <div id="led-out2" class="led off"></div>
+                                <div id="led-out3" class="led off"></div>
+                                <div id="led-out4" class="led off"></div>
+                                <div id="led-out5" class="led off"></div>
+                                <div id="led-out6" class="led off"></div>
+                            </div>
+
+                        </div>
+                    </div>        
+                </div>
+
+
+                <div class="card">
+                    <h2>Temperatura Ambiente</h2>
+                    <p class="temp-amb"><span id="tempamb">0</span>
+                    <span class="units">ºC</span> </p>
+                </div>
+
+                <div class="card">
+                    <h2>Mediciones</h2>
+                    <div class="labelval">
+                        <label>Deteccion:</label>
+                        <p class="med"><span id="vxdet">0</span>
+                        <span class="units">%</span> </p>
+                    </div>
+                    <div class="labelval">
+                        <label>Real. Pos:</label>
+                        <p class="med"><span id="vxpos">0</span>
+                        <span class="units">%</span> </p>
+                    </div>
+                    <div class="labelval">
+                        <label>Pid:</label>
+                        <p class="med"><span id="vxpid">0</span>
+                        <span class="units">%</span> </p>
+                    </div>  
+                    <div class="labelval"> 
+                        <label>Pote:</label>
+                        <p class="med"><span id="vxpote">0</span>
+                        <span class="units">%</span> </p>
+                    </div>                        
+                </div>
+
+                <div class="card">
+                    <h2>Salidas Actuador</h2>
+                    <div class="labelval">
+                        <label>Principal:</label>
+                        <p class="med"><span id="outa1">0</span>
+                        <span class="units">%</span> </p>
+                    </div>
+                    <div class="labelval">
+                        <label>Secundario:</label>
+                        <p class="med"><span id="outa2">0</span>
+                        <span class="units">%</span> </p>
+                    </div>    
+                </div>
+    
+                <div class="card">
+                    <h2>Comando Quemador</h2>
+                    <button id="onButton" class="onButton">ENCENDER</button>
+                    <button id="abfButton" class="onButton">BAJO FUEGO</button>
+                    <p class="gray-label">Para modificar el alto o bajo fuego debe finalizar el encendido</p>
+                    
+                </div>
+            </div>
+
+            <div class="param-grid">
+                <div class="param">
+
+                  <h2>Parámetros</h2>
+                    <div class="param-row">
+                        <select id="seleParm" onchange="leerParametro()">
+                        <option value="0">Seleccionar</option>
+                        </select>
+                
+                        <label for="parLeido"></label>
+                
+                        <input id="parLeido" name="fname" style="display: none;" />
+                        <label id="s1L" style="display: none;">S1:</label>
+                        <input class="indw" id="n1Leido" name="fname" style="display: none;" />
+                        <label id="s2L" style="display: none;">S2:</label>
+                        <input class="indw" id="n2Leido" name="fname" style="display: none;" />
+                
+                        <select id="selecText" style="display: none;">
+                        <option value=""></option>
+                        </select>
+                
+                        <button id="actButton" class="onButton">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modelo CE4_MS -->
+        <div id="pantalla-CE4_MS" class="pantalla">
+            <h2>Modelo CE4_MS</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h2>Estado del Quemador</h2>
+                    <p class="reading"><span id="valueContainer">Sin Dato</span></p>
+                    <p class="reading"><span id="tiempoState">0</span></p>
+                    <p class="gray-label">Ultima Lectura: <span id="timestamp"></span></p>
+                </div>
+
+                <div class="card">
+                    <h2>Estado Entradas</h2>
+                    <div class="led-panel">
+                        <div class="led-group">
+                          
+                            <div class="led-labels">
+                                <span>INI</span><span>REA</span><span>MVC</span><span>PAB</span><span>PGB</span><span>PGA</span><span>PPG</span><span>FCA</span><span>FCC</span><span>DET</span>
+                            </div>
+                            <div class="led-lights">
+                                <div id="led-in1" class="led off"></div>
+                                <div id="led-in2" class="led off"></div>
+                                <div id="led-in3" class="led off"></div>
+                                <div id="led-in4" class="led off"></div>
+                                <div id="led-in5" class="led off"></div>
+                                <div id="led-in6" class="led off"></div>
+                                <div id="led-in7" class="led off"></div>
+                                <div id="led-in8" class="led off"></div>
+                                <div id="led-in9" class="led off"></div>
+                                <div id="led-in10" class="led off"></div>
+                            </div>
+
+                     
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="card">
+                    <h2>Estado Salidas</h2>
+
+                    <div class="led-panel">
+                        <div class="led-group">
+                           
+                            <div class="led-labels">
+                                <span>SQ3</span><span>SQ2</span><span>SQ1</span><span>SPI</span><span>ENC</span><span>MOT</span>
+                            </div>
+                            <div class="led-lights">
+                                <div id="led-out1" class="led off"></div>
+                                <div id="led-out2" class="led off"></div>
+                                <div id="led-out3" class="led off"></div>
+                                <div id="led-out4" class="led off"></div>
+                                <div id="led-out5" class="led off"></div>
+                                <div id="led-out6" class="led off"></div>
+                            </div>
+
+                        </div>
+                    </div>        
+                </div>
+
+                <div class="card">
+                    <h2>Temperatura Ambiente</h2>
+                    <p class="temp-amb"><span id="tempamb">0</span>
+                    <span class="units">ºC</span> </p>
+                </div>
+
+                <div class="card">
+                    <h2>Mediciones</h2>
+                    <div class="labelval">
+                        <label>Deteccion:</label>
+                        <p class="med"><span id="vxdet">0</span>
+                        <span class="units">%</span> </p>
+                    </div>
+                    <div class="labelval">
+                        <label>Real. Pos:</label>
+                        <p class="med"><span id="vxpos">0</span>
+                        <span class="units">%</span> </p>
+                    </div>
+                    <div class="labelval">
+                        <label>Pid:</label>
+                        <p class="med"><span id="vxpid">0</span>
+                        <span class="units">%</span> </p>
+                    </div>  
+                    <div class="labelval"> 
+                        <label>Pote:</label>
+                        <p class="med"><span id="vxpote">0</span>
+                        <span class="units">%</span> </p>
+                    </div>                        
+                </div>
+
+                <div class="card">
+                    <h2>Salidas Actuador</h2>
+                    <div class="labelval">
+                        <label>Principal:</label>
+                        <p class="med"><span id="outa1">0</span>
+                        <span class="units">%</span> </p>
+                    </div>
+                    <div class="labelval">
+                        <label>Secundario:</label>
+                        <p class="med"><span id="outa2">0</span>
+                        <span class="units">%</span> </p>
+                    </div>    
+                </div>
+
+                <div class="card">
+                    <h2>Comando Quemador</h2>
+                    <button id="onButton" class="onButton">ENCENDER</button>
+                    <label> SQ3: </label>
+                    <button id="abfButton" class="onButton">DESACTIVADO</button>
+                    <p class="gray-label">Cuando se detecta llama, se espera un tiempo de sincro y se activa SQ3 para habilitar los esclavos</p>
+                </div>
+            </div>
+
+            <div class="param-grid">
+                <div class="param">
+
+                  <h2>Parámetros</h2>
+                    <div class="param-row">
+                        <select id="seleParm" onchange="leerParametro()">
+                        <option value="0">Seleccionar</option>
+                        </select>
+                
+                        <label for="parLeido"></label>
+                
+                        <input id="parLeido" name="fname" style="display: none;" />
+                        <label id="s1L" style="display: none;">S1:</label>
+                        <input class="indw" id="n1Leido" name="fname" style="display: none;" />
+                        <label id="s2L" style="display: none;">S2:</label>
+                        <input class="indw" id="n2Leido" name="fname" style="display: none;" />
+                
+                        <select id="selecText" style="display: none;">
+                        <option value=""></option>
+                        </select>
+                
+                        <button id="actButton" class="onButton">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modelo CE5 -->
+        <div id="pantalla-CE5" class="pantalla">
+            <h2>Modelo CE5</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h2>Estado del Quemador</h2>
+                    <p class="reading"><span id="valueContainer">Sin Dato</span></p>
+                    <p class="reading"><span id="tiempoState">0</span></p>
+                    <p class="gray-label">Ultima Lectura: <span id="timestamp"></span></p>
+                </div>
+
+                
+                
+                <div class="card">
+                    <h2>Estado Entradas</h2>
+                    <div class="led-panel">
+                        <div class="led-group">
+                          
+                            <div class="led-labels">
+                                <span>INI</span><span>REA</span><span>ABF</span><span>PAB</span><span>PGB</span><span>DET</span>
+                            </div>
+                            <div class="led-lights">
+                                <div id="led-in1" class="led off"></div>
+                                <div id="led-in2" class="led off"></div>
+                                <div id="led-in3" class="led off"></div>
+                                <div id="led-in4" class="led off"></div>
+                                <div id="led-in5" class="led off"></div>
+                                <div id="led-in6" class="led off"></div>
+                            </div>
+
+                     
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="card">
+                    <h2>Estado Salidas</h2>
+
+                    <div class="led-panel">
+                        <div class="led-group">
+                           
+                            <div class="led-labels">
+                                <span>SQ3</span><span>SQ1</span><span>SPI</span><span>ENC</span><span>MOT</span>
+                            </div>
+                            <div class="led-lights">
+                                <div id="led-out1" class="led off"></div>
+                                <div id="led-out2" class="led off"></div>
+                                <div id="led-out3" class="led off"></div>
+                                <div id="led-out4" class="led off"></div>
+                                <div id="led-out5" class="led off"></div>
+                            </div>
+
+                        </div>
+                    </div>        
+                </div>
+
+                <div class="card">
+                    <h2>Temperatura Ambiente</h2>
+                    <p class="temp-amb"><span id="tempamb">0</span>
+                    <span class="units">ºC</span> </p>
+
+                </div>
+    
+                <div class="card">
+                    <h2>Comando Quemador</h2>
+                    <button id="onButton" class="onButton">ENCENDER</button>
+                    <button id="abfButton" class="onButton">BAJO FUEGO</button>
+                    <p class="gray-label">Para modificar el alto o bajo fuego debe finalizar el encendido</p>
+                    
+                </div>
+            </div>
+
+            <div class="param-grid">
+                <div class="param">
+
+                  <h2>Parámetros</h2>
+                    <div class="param-row">
+                        <select id="seleParm" onchange="leerParametro()">
+                        <option value="0">Seleccionar</option>
+                        </select>
+                
+                        <label for="parLeido"></label>
+                
+                        <input id="parLeido" name="fname" style="display: none;" />
+                        <select id="selecText" style="display: none;">
+                        <option value=""></option>
+                        </select>
+                
+                        <button id="actButton" class="onButton">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+
+
+    </div>
+
+    <script src="js/script_BLE.js"></script>       
+</body>
+</html>

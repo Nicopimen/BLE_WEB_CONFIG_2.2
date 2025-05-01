@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+  <meta charset="UTF-8">
+  <title>Permisos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="cofaco280.ico">
+  <link rel="stylesheet" href="css/styles_config-usuarios.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <h2>Permisos de Usuarios</h2>
+
+    <div class="card">
+        <label for="selectUsuarioPermisos">Seleccionar usuario:</label>
+        <select id="selectUsuarioPermisos">
+          <option value="">-- Elegir usuario --</option>
+        </select>
+      
+        <label for="selectTipoPermiso">Tipo de Equipo:</label>
+        <select id="selectTipoPermiso">
+          <option value="">-- Elegir tipo --</option>
+          <option value="CE4">CE4</option>
+          <option value="CE4_MS">CE4_MS</option>
+          <option value="CE5">CE5</option>
+        </select>
+      
+        <button onclick="cargarPermisosDesdeServidor()">Cargar permisos</button>
+      
+        <div class="table-container" style="margin-top: 2rem;">
+          <table class="user-table" id="tablaPermisos">
+            <thead>
+              <tr>
+                <th>Parámetro</th>
+                <th>Visible</th>
+                <th>Editable</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      
+        <button onclick="descargarCSVPermisos()">Actualizar y Descargar</button>
+      </div>
+
+     <script src="js/script_config-permisos.js"></script>
+
+</body>
+</html>
+

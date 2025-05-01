@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+<head>
+  <meta charset="UTF-8">
+  <title>Configuracion Ususarios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="cofaco280.ico">
+  <link rel="stylesheet" href="css/styles_config-usuarios.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <h2>Configuración de Usuarios</h2>
+    <div class="card">
+      <div class="table-container">
+          <h3>Lista de Usuarios</h3>
+          <table class="user-table" id="tablaUsuarios">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+
+      <div id="form-config-admin" class="card">
+      <label for="selectUser">Seleccionar usuario:</label>
+      <select id="selectUser">
+          <option value="">-- Elegir --</option>
+      </select>
+
+      <label for="nuevaClave">Nueva clave:</label>
+      <input type="password" id="nuevaClave" placeholder="Nueva clave" />
+
+      <label for="estadoClave">Estado:</label>
+      <select id="estadoClave">
+          <option value="valida">Valida</option>
+          <option value="invalida">Invalida</option>
+      </select>
+
+      <button onclick="actualizarUsuario()">Actualizar y Descargar</button>
+      </div>
+    </div>
+
+    <script src="js/script_config-usuarios.js"></script>
+
+</body>
+</html>
+
