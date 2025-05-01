@@ -308,9 +308,9 @@ h1 {
 
 .card-grid, .param-grid {
   display: grid;
-  grid-template-columns: 0.8fr;
-  gap: 0.7rem;
-  padding: 0.7rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
   justify-content: center;
 }
 
