@@ -142,8 +142,8 @@ h1 {
   
   .param-row select,
   .param-row label {
-      width: 90%;
-      max-width: 90%;
+      width: 95%;
+      max-width: 95%;
       text-align: left;
   }
   .param-row button {
@@ -171,6 +171,8 @@ h1 {
     grid-template-columns: 1fr;
     gap: 0.8rem;
     padding: 0.8rem;
+    width: 95%;
+    max-width: 95%;
   }
 
    .card-grid, .card{
@@ -178,9 +180,10 @@ h1 {
     align-items: flex-start;
     height: auto;
     padding: 1rem;
-    width: 98%;
-    max-width: 98%;
-    margin: 0 auto 10px auto;
+    width: 95%;
+    max-width: 95%;
+    /*margin: 0 auto 10px auto;*/
+     margin: 10px auto;
    
   }
 
