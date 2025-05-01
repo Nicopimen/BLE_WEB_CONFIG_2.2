@@ -136,7 +136,7 @@ h1 {
       flex-direction: column;
       align-items: stretch;
       height: auto;
-      padding: 1rem;
+      padding: 0.6rem;
   }
   
   .param-row select,
@@ -296,9 +296,9 @@ h1 {
 
 .card-grid, .param-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: 0.8fr;
+  gap: 0.7rem;
+  padding: 0.7rem;
   justify-content: center;
 }
 
@@ -314,7 +314,7 @@ h1 {
 }
 
 .param h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   text-align: center;
   color: #fafafa;
 }
@@ -323,7 +323,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-top: 10px;
 }
@@ -402,12 +402,21 @@ button:hover {
   font-size: 1.3rem;
 }
 
-.labelval label {
+.labelval2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin: 0.4rem 0;
+  font-size: 1.3rem;
+}
+
+.labelval label,.labelval2 label {
   flex: 1;
   text-align: left;
 }
 
-.labelval p {
+.labelval p,.labelval2 p {
   flex: 1;
   text-align: right;
   margin: 0;
