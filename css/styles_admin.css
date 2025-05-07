@@ -135,9 +135,9 @@ h1 {
   .param-row {
       flex-direction: column;
       align-items: stretch;
-      /*height: auto;
+      height: auto;
       padding: 5px;
-      gap: 8px*/
+      gap: 8px
   }
   
   .param-row select,
@@ -153,7 +153,7 @@ h1 {
   }
 
   .param-row input{
-      width: 170px;
+      width: 120px;
      /* max-width: 50%;*/
       text-align: left;
   }
