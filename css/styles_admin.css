@@ -133,11 +133,11 @@ h1 {
   }
  
   .param-row {
-      flex-direction: column;
+      /*flex-direction: column;*/
       align-items: stretch;
-      height: auto;
+      /*height: auto;
       padding: 5px;
-      gap: 8px
+      gap: 8px*/
   }
   
   .param-row select,
@@ -168,18 +168,24 @@ h1 {
   }
 
   .param-grid {
-    grid-template-columns: 0.7fr;
+    grid-template-columns: 0.8fr;
     gap: 0.5rem;
     padding: 0.5rem;
+    width: 95%;
+    max-width: 95%;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
    .card-grid, .card{
     flex-direction: column;
     align-items: flex-start;
     height: auto;
-    padding: 0.2rem;
-    width: 95%;
-    max-width: 95%;
+    padding: 0.4rem;
+    width: 100%;
+    max-width: 100%;
     /*margin: 0 auto 10px auto;*/
    
   }
@@ -188,8 +194,8 @@ h1 {
   .led-labels,
   .led-lights {
     gap: 0.6rem; /* Un gap más pequeño en pantallas chicas */
-    margin: 0 auto;
-    width: 98%;
+    margin: 10px 10px 10px 10px;
+    width: 95%;
   }
 
   .led-labels span,
@@ -208,8 +214,9 @@ h1 {
   .content {
     width: 90%;
     max-width: 90%;
-    margin: 10px auto;
-    padding: 1rem;
+    /*margin: 10px auto;*/
+    padding: 0.2rem;
+    align-items: center;
   }
 
 }
@@ -295,8 +302,8 @@ h1 {
   background-color: #2c2c2e;
   border-radius: 10px;
   padding: 2rem;
-  max-width: 600px;
-  margin: 10px auto;
+  max-width: 700px;
+  margin: 10px auto 10px auto;
   /*margin: 20px 20px 20px 20px;*/
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   justify-content: center;
@@ -305,10 +312,11 @@ h1 {
 
 .card-grid, .param-grid {
   display: grid;
-  grid-template-columns: 0.8fr;
+  /*grid-template-columns: 0.8fr;*/
   gap: 0.7rem;
   padding: 0.7rem;
   justify-content: center;
+  align-items: center;
 }
 
 .card, .param {
@@ -320,6 +328,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px; 
+  margin: 10px auto 10px auto;
+}
+
+.param {
+  width: 450px; 
 }
 
 .param h2 {
@@ -529,7 +543,7 @@ select option:hover {
   align-items: center;
   justify-content: center;
   gap: 2.0rem;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
   
 }
 .led-lights {
@@ -537,7 +551,7 @@ select option:hover {
   justify-content: center;
   align-items: center;
   gap: 2.0rem;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
 }
 
 .led-labels span,
@@ -577,3 +591,4 @@ select option:hover {
   background-color: #f1c40f; /* amarillo */
   box-shadow: 0 0 10px #f1c40f;
 }
+
