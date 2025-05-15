@@ -138,7 +138,7 @@ async function cargarUsuariosDesdeCSV() {
   ).join("\n");
 */
   const contenidoCSV = permisos.map(p =>
-    `${p.parametro},${p.visible.toUpperCase()},${p.editable.toUpperCase()}`
+    `${p.parametro},${p.visible.toUpperCase()},${p.editable.toUpperCase()},`
   ).join("\n");
 
   const blob = new Blob([contenidoCSV], { type: "text/csv;charset=utf-8;" });
